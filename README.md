@@ -17,6 +17,22 @@ npm run dev
 
 Vite prints the local address to open in your browser. Keep the terminal running while using the studio. Press `Ctrl+C` to stop it. If you use nvm, `nvm use` selects the version in `.nvmrc`.
 
+## Public preview on GitHub Pages
+
+The application source is on the `main` branch of `skydiazsd-gif/nido-del-bosque` on GitHub. To publish a public preview from a clean, committed checkout, run:
+
+```sh
+npm run deploy:pages
+```
+
+This builds the static application with the `/nido-del-bosque/` base path and publishes the generated files to the `gh-pages` branch using Git. It leaves the source checkout and its current branch unchanged. Your Git access must allow pushing to this repository; no application API key is needed.
+
+For the first publication, open the repository on GitHub and select **Settings → Pages → Build and deployment**. Choose **Deploy from a branch**, select **gh-pages** and **/(root)**, then click **Save**. GitHub builds and deploys the site. Use the preview link shown by GitHub after that deployment succeeds; publishing the branch alone does not establish that the site is live.
+
+The preview site is public. Images uploaded through the inspiration gallery remain in that browser's local storage and are not published to GitHub Pages.
+
+The chat Web Preview panel is unavailable during cloud environment onboarding. For local development, use `npm run dev` and the terminal instructions above.
+
 ## Explore the starter
 
 - **Design studio:** rotate and zoom around a procedural elevated cabin; choose a camera view; adjust cabin dimensions, elevation, roof pitch and terrace dimensions; try four exterior finish palettes.
