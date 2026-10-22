@@ -29,7 +29,7 @@ The initial application focuses on design exploration:
 5. A local inspiration gallery with categories and notes.
 6. Browser-local persistence for the current baseline design, budget and images.
 
-The baseline is **Contemporary Elevated Cabin — V1**. A 9 m × 6 m enclosed mass plus a 3 m × 2 m terrace totals 60 m². Illustrative 150 mm walls and internal partition deductions produce an estimated net quantity; neither this deduction nor the procedural geometry is engineering-verified.
+The original brief baseline, **Contemporary Elevated Cabin — V1**, was a 9 m × 6 m enclosed mass plus a 3 m × 2 m terrace, totalling 60 m². The owner’s V2 refinement moves the stairs and entrance to the left side (when facing the front) and extends the front balcony across the full cabin length. Keeping the 9 m × 6 m cabin and 2 m balcony depth gives 54 m² enclosed, 18 m² balcony and approximately 2.88 m² side landing: 74.88 m² overall, before any additional stair classification. This exceeds the reported allowance and requires a revised area strategy; the app makes that overage visible. Illustrative 150 mm walls and internal partition deductions produce an estimated net quantity; neither this deduction nor the procedural geometry is engineering-verified.
 
 The budget categories distribute the fixed ceiling for exploration. The reference brief describes a broader reverse-budget framework with COP 8M contingency and a severely constrained building remainder. Neither framework demonstrates that the preferred elevated cabin can be delivered for COP 80M. Replace placeholders with comparable, itemised quotations before using totals for a decision.
 

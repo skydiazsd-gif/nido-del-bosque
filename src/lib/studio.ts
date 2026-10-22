@@ -5,7 +5,7 @@ export const BUDGET_LIMIT = 80_000_000
 export const STORAGE_KEY = 'nido-del-bosque:studio:v1'
 export const DEFAULT_DESIGN: CabinDesign = {
   length: 9, width: 6, elevation: 2.6, roofPitch: 8,
-  terraceWidth: 3, terraceDepth: 2, finish: 'natural',
+  terraceDepth: 2, finish: 'natural',
 }
 
 export const FINISHES: { id: Finish; label: string; color: string; description: string }[] = [
@@ -32,16 +32,39 @@ export const DEFAULT_BUDGET: BudgetItem[] = [
   { id: 'contingency', label: 'Contingency', amount: 8_000_000 },
 ]
 
+export function getAccessLayout(design: CabinDesign) {
+  const landingWidth = 1.2
+  const landingBack = design.width / 2 - 1.2
+  const landingFront = design.width / 2 + Math.min(design.terraceDepth, landingWidth)
+  const stepCount = Math.max(8, Math.ceil(design.elevation / 0.185))
+  const tread = 0.26
+  return {
+    balconyWidth: design.length,
+    landingWidth,
+    landingBack,
+    landingFront,
+    landingDepth: landingFront - landingBack,
+    landingCenterX: -design.length / 2 - landingWidth / 2,
+    landingCenterZ: (landingBack + landingFront) / 2,
+    doorZ: design.width / 2 - 0.6,
+    stepCount,
+    tread,
+    stairRun: stepCount * tread,
+  }
+}
+
 export function getAreas(design: CabinDesign) {
   const enclosed = design.length * design.width
-  const terrace = design.terraceWidth * design.terraceDepth
+  const access = getAccessLayout(design)
+  const terrace = access.balconyWidth * design.terraceDepth
+  const landing = access.landingWidth * access.landingDepth
   // 150 mm conceptual exterior walls plus indicative internal partitions.
   // Net area is an approximation, never a surveyed or engineered quantity.
   const insideLength = Math.max(0, design.length - 0.3)
   const insideWidth = Math.max(0, design.width - 0.3)
   const partitionArea = 0.15 * (insideWidth + insideLength / 3)
   return {
-    enclosed, terrace, total: enclosed + terrace,
+    enclosed, terrace, landing, total: enclosed + terrace + landing,
     estimatedNet: Math.max(0, insideLength * insideWidth - partitionArea),
   }
 }
@@ -70,7 +93,7 @@ function isDesign(value: unknown): value is CabinDesign {
   const d = value as CabinDesign
   return inRange(d.length, 6, 12) && inRange(d.width, 4, 8)
     && inRange(d.elevation, 2.2, 3.4) && inRange(d.roofPitch, 3, 18)
-    && inRange(d.terraceWidth, 2, 6) && inRange(d.terraceDepth, 1, 3)
+    && inRange(d.terraceDepth, 1, 3)
     && FINISHES.some(finish => finish.id === d.finish)
 }
 
@@ -90,9 +113,13 @@ export function loadStudio(storage: ReadStorage | undefined = browserStorage()):
     const raw = storage?.getItem(STORAGE_KEY)
     if (!raw) return defaults
     const stored = JSON.parse(raw) as { version?: number; state?: Partial<StudioState> }
-    if (stored.version !== 1 || !stored.state) return defaults
+    if ((stored.version !== 1 && stored.version !== 2) || !stored.state) return defaults
     const saved = stored.state
-    if (isDesign(saved.design)) defaults.design = saved.design
+    if (isDesign(saved.design)) {
+      // Retain existing dimensions/materials while retiring the old partial-width terrace.
+      const { length, width, elevation, roofPitch, terraceDepth, finish } = saved.design
+      defaults.design = { length, width, elevation, roofPitch, terraceDepth, finish }
+    }
     if (Array.isArray(saved.budget)) {
       defaults.budget = defaults.budget.map(base => {
         const savedItem = saved.budget!.find(item => item?.id === base.id)
@@ -108,7 +135,7 @@ export function loadStudio(storage: ReadStorage | undefined = browserStorage()):
 export function saveStudio(state: StudioState, storage: WriteStorage | undefined = browserStorage()): boolean {
   if (!storage) return false
   try {
-    storage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, state }))
+    storage.setItem(STORAGE_KEY, JSON.stringify({ version: 2, state }))
     return true
   } catch { return false }
 }

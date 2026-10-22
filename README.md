@@ -35,12 +35,14 @@ The chat Web Preview panel is unavailable during cloud environment onboarding. F
 
 ## Explore the starter
 
-- **Design studio:** rotate and zoom around a procedural elevated cabin; choose a camera view; adjust cabin dimensions, elevation, roof pitch and terrace dimensions; try four exterior finish palettes.
-- **Preliminary floor plan:** view an indicative layout that scales with the cabin and terrace. A live area summary counts the gross enclosed footprint plus terrace against the owner-reported 60 m² allowance.
+- **Design studio:** rotate and zoom around a procedural elevated cabin; choose a camera view; adjust cabin dimensions, elevation, roof pitch and balcony depth; try four exterior finish palettes.
+- **Preliminary floor plan:** view an indicative layout that scales with the cabin and terrace. A live area summary counts the gross enclosed footprint, full-width balcony and side entrance landing against the owner-reported 60 m² allowance.
 - **Budget:** edit 14 cost categories in Colombian pesos and see the total, remaining allowance, allocation percentage and cost per gross constructed square metre against COP 80,000,000.
 - **Inspiration:** upload reference images, categorise them, add notes and remove them.
 
-The starting design is **Contemporary Elevated Cabin — V1**: 9 m × 6 m enclosed, with a 3 m × 2 m terrace. That is **54 m² gross enclosed + 6 m² terrace = 60 m²**.
+The current design is **Contemporary Elevated Cabin — V2**: 9 m × 6 m enclosed, with a 9 m × 2 m full-width front balcony, a left-side staircase and side entrance. The connecting side landing is approximately 2.88 m². That is **54 m² enclosed + 18 m² balcony + 2.88 m² landing = 74.88 m²**, exceeding the owner-reported 60 m² allowance. The studio shows this overage rather than shrinking the cabin automatically. Stair-area treatment still needs municipal confirmation. Balcony width follows cabin length; balcony depth remains adjustable.
+
+Existing saved dimensions, finishes, budget entries and inspiration images are retained when moving from V1 to V2; the former partial-width terrace becomes full-width automatically.
 
 Settings, budget entries and inspiration images are saved in this browser's local storage. They do not sync across devices or browsers. Clearing browser data removes them; storage limits may prevent saving large image collections. Named design versions, budget scenario comparison and file export are future work.
 

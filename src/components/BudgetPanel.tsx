@@ -45,7 +45,7 @@ export default function BudgetPanel({ items, onChange, design }: BudgetPanelProp
         <div className="budget-stat">
           <span className="stat-label"><ArrowUpRight size={16} /> Allocation per m²</span>
           <strong>{formatCOP(area > 0 ? total / area : 0)}</strong>
-          <span>across {area.toFixed(1)} m² gross incl. terrace</span>
+          <span>across {area.toFixed(1)} m² gross incl. balcony & landing</span>
         </div>
       </div>
 

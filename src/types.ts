@@ -5,7 +5,6 @@ export interface CabinDesign {
   width: number
   elevation: number
   roofPitch: number
-  terraceWidth: number
   terraceDepth: number
   finish: Finish
 }
